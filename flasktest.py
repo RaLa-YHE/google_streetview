@@ -316,22 +316,16 @@ def allpath(graph, start, end):
 def dijkstra(graph, start, end):
     visited = {start: 0}
     h = [(0, start)]
-    path = {}
-    lst=[]
-    distances = {vertex: float('inf') for vertex in graph} # 시작점과 모든 정점과의 사리의 거리를 무한으로 지정
-    #istances[start] = [0, start] # 시작점과 시작점 사이의 거리 0
-    #queue = [] # [[거리,정점]]
-    #print(distances[start][0])
-    #heapq.heappush(queue, [distances[start][0], start])
+    path = {}, lst=[]
+    distances = {vertex: float('inf') for vertex in graph}
+  
     while distances:
         current_distance, current_vertex = heapq.heappop(h)
         try:
             while current_vertex not in distances:
                 current_distance, current_vertex = heapq.heappop(h)
         except IndexError:
-             break
-        #if distances[current_vertex][0] < current_distance:
-            #continue
+            break
 
         if current_vertex == end:
             way = end
@@ -343,25 +337,19 @@ def dijkstra(graph, start, end):
                 lst.append(way)
             lst.append(start)
             path_output += start
-            #print(path_output)
-
             return visited[end], path, lst
 
         del distances[current_vertex]
 
         for v, weihgt in graph[current_vertex].items():
             weihgt = current_distance + weihgt
-            #if weihgt < distances[adjacent][0]: # 현재까지 시작정점과 현재정점사이의 거리보다 짧다면
-                #distances[adjacent] = [dis, current_vertex] # 현재정점과 시작정점 사이의 거리 업데이트
-                #heapq.heappush(queue, [dis, adjacent])
-
             if v not in visited or weihgt < visited[v] :
                 visited[v] = weihgt
                 heapq.heappush(h,(weihgt,v))
                 path[v] = current_vertex
-
-
     return visited,path,lst
+
+
 def findlatlng(name):
     lat = df3[df3['도로명'] == name].loc[:, '위도'].values[0]
     lng = df3[df3['도로명'] == name].loc[:, '경도'].values[0]
