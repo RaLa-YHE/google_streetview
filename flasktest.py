@@ -359,7 +359,6 @@ def location(dep,des):
     s = getPos(dep_lat, dep_lng)
     e = getPos(des_lat, des_lng)
     dfs_a, dfs_b, dfs_c = allpath(lst, s, e)
-    print(dfs_c)
     temp = []
     for i in dfs_c:
         ss, ee = findlatlng(i)
@@ -376,7 +375,6 @@ def location2(dep,des):
     e = getPos(des_lat, des_lng)
     print(s,e)
     (a, b, c) = dijkstra(lst2, s, e)
-    print(c)
     temp = []
     for i in c:
         ss, ee = findlatlng(i)
