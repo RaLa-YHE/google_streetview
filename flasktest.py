@@ -247,7 +247,6 @@ def getPos(x, y):
     for i in range(len(ddff)):
         if abs(x - ddff.loc[i, 'p1위도']) + abs(y - ddff.loc[i, 'p1경도']) >\
                 abs(x - ddff.loc[i, 'p2위도']) + abs(y - ddff.loc[i, 'p2경도']):
-
             position1.append([i, abs(x - ddff.loc[i, 'p1위도']) + abs(y - ddff.loc[i, 'p1경도'])])
         else:
             position2.append([i, abs(x - ddff.loc[i, 'p2위도']) + abs(y - ddff.loc[i, 'p2경도'])])
@@ -268,11 +267,9 @@ def getPos(x, y):
 
     if result1 >0:
         road =df3.loc[result1, '도로명']
-
         return road
     else :
         road =df3.loc[result2, '도로명']
-
         return road
 
 def allpath(graph, start, end):
