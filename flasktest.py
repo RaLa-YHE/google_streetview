@@ -275,9 +275,8 @@ def getPos(x, y):
 def allpath(graph, start, end):
     visited = {start: 0}
     h = [(0, start)]
-    path = {}
-    lst=[]
-    distances = {vertex: float('inf') for vertex in graph} # 시작점과 모든 정점과의 사리의 거리를 무한으로 지정
+    path = {}, lst=[]
+    distances = {vertex: float('inf') for vertex in graph} 
     while distances:
         current_distance, current_vertex = heapq.heappop(h)
         try:
@@ -285,18 +284,15 @@ def allpath(graph, start, end):
                 current_distance, current_vertex = heapq.heappop(h)
         except IndexError:
              break
-
+                
         if current_vertex == end:
             way = end
             lst.append(way)
-            path_output = end + '->'
             while path[way] != start:
                 path_output += path[way] + '->'
                 way = path[way]
                 lst.append(way)
             lst.append(start)
-            path_output += start
-
             return visited[end], path, lst
 
         del distances[current_vertex]
@@ -309,8 +305,6 @@ def allpath(graph, start, end):
                 visited[v] = weihgt
                 heapq.heappush(h,(weihgt,v))
                 path[v] = current_vertex
-
-
     return visited,path,lst
 
 def dijkstra(graph, start, end):
