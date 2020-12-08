@@ -330,13 +330,10 @@ def dijkstra(graph, start, end):
         if current_vertex == end:
             way = end
             lst.append(way)
-            path_output = end + '->'
             while path[way] != start:
-                path_output += path[way] + '->'
                 way = path[way]
                 lst.append(way)
             lst.append(start)
-            path_output += start
             return visited[end], path, lst
 
         del distances[current_vertex]
