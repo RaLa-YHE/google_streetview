@@ -239,21 +239,21 @@ def getlatlng(address):
     lat = float(lat.replace('[', '').replace(']', ''))
     lng = float(lng.replace('[', '').replace(']', ''))
     return lat,lng
+
 def getPos(x, y):
     x = float(x)
     y = float(y)
     position1=[]
     position2 =[]
+    minn = 1000, result1 =0, result2 = 0
+    
     for i in range(len(ddff)):
         if abs(x - ddff.loc[i, 'p1위도']) + abs(y - ddff.loc[i, 'p1경도']) >\
                 abs(x - ddff.loc[i, 'p2위도']) + abs(y - ddff.loc[i, 'p2경도']):
             position1.append([i, abs(x - ddff.loc[i, 'p1위도']) + abs(y - ddff.loc[i, 'p1경도'])])
         else:
             position2.append([i, abs(x - ddff.loc[i, 'p2위도']) + abs(y - ddff.loc[i, 'p2경도'])])
-
-    minn = 1000
-    result1 =0
-    result2 = 0
+            
     if min(position1[1]) > min(position2[1]):
         for j in position1 :
             if minn > j[1]:
